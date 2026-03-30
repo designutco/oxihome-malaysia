@@ -140,9 +140,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               <div className="flex items-center gap-3 shrink-0">
                 <LanguageSwitcher currentLocale={locale} />
                 <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/${locale}/redirect-whatsapp-1`}
                   className="hidden sm:inline-flex items-center gap-2 font-semibold px-4 py-2 rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 transition-opacity hover:opacity-90 active:opacity-80"
                   style={{ background: WA_GREEN }}
                 >
@@ -174,9 +172,7 @@ export default async function LocaleLayout({ children, params }: Props) {
                     {tf('tagline')}
                   </p>
                   <a
-                    href={WA_LINK}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={`/${locale}/redirect-whatsapp-1`}
                     className="inline-flex items-center gap-2 mt-5 text-sm font-semibold transition-opacity hover:opacity-80"
                     style={{ color: WA_GREEN }}
                   >

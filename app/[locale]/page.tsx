@@ -202,9 +202,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </p>
 
             <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/${locale}/redirect-whatsapp-1`}
               className="inline-flex items-center gap-3 font-bold px-7 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-400"
               style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.35)' }}
             >
@@ -346,7 +344,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <CountdownStrip
-        waLink={WA_LINK}
+        waLink={`/${locale}/redirect-whatsapp-1`}
         label={locale === 'ms' ? '⚡ Tawaran Hari Ini Tamat Dalam:' : locale === 'zh' ? '⚡ 今日优惠倒计时：' : '⚡ Today\'s delivery slots close in:'}
       />
 
@@ -474,9 +472,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                 </div>
 
                 <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/${locale}/redirect-whatsapp-1`}
                   className="flex items-center justify-center gap-2 font-bold py-3 rounded-xl text-sm text-white transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-green-400"
                   style={{ background: WA_GREEN }}
                 >
@@ -594,9 +590,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <p>{t('why.p2')}</p>
             </div>
             <a
-              href={WA_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={`/${locale}/redirect-whatsapp-1`}
               className="inline-flex items-center gap-2.5 mt-7 font-bold px-7 py-4 rounded-full text-white transition-all hover:scale-105 active:scale-95"
               style={{ background: WA_GREEN, boxShadow: '0 8px 24px rgba(37,211,102,0.3)' }}
             >
@@ -768,9 +762,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             </p>
             <div>
               <a
-                href={WA_LINK}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/${locale}/redirect-whatsapp-1`}
                 className="inline-flex items-center gap-3 font-bold px-8 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-400"
                 style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.4)' }}
               >
