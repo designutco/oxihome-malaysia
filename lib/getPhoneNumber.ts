@@ -1,3 +1,4 @@
+import { headers } from 'next/headers'
 import { supabase } from './supabase'
 import { siteConfig } from '@/config/site'
 
@@ -5,15 +6,18 @@ const PRODUCT_SLUG = 'oxygen-machine'
 
 /**
  * Fetch a random active phone number for a location from Supabase.
+ * Uses the actual request host as the website identifier — no env vars needed.
  * Fallback chain: location-specific pool → 'all' pool → siteConfig.fallbackPhone
  * Never throws — always returns a valid phone string.
  */
 export async function getPhoneNumber(locationSlug: string): Promise<string> {
   try {
+    const host = (await headers()).get('host') ?? siteConfig.domain
+
     const { data, error } = await supabase
       .from('phone_numbers')
       .select('phone_number, location_slug')
-      .eq('website', siteConfig.domain)
+      .eq('website', host)
       .eq('product_slug', PRODUCT_SLUG)
       .eq('is_active', true)
       .in('location_slug', [locationSlug, 'all'])
@@ -25,16 +29,13 @@ export async function getPhoneNumber(locationSlug: string): Promise<string> {
 
     if (!data || data.length === 0) return siteConfig.fallbackPhone
 
-    // Prefer location-specific numbers; fall back to 'all' pool
     const locationPool = data.filter(r => r.location_slug === locationSlug)
     const allPool = data.filter(r => r.location_slug === 'all')
     const pool = locationPool.length > 0 ? locationPool : allPool
 
     if (pool.length === 0) return siteConfig.fallbackPhone
 
-    // Pick one at random
-    const picked = pool[Math.floor(Math.random() * pool.length)]
-    return picked.phone_number
+    return pool[Math.floor(Math.random() * pool.length)].phone_number
   } catch {
     return siteConfig.fallbackPhone
   }
