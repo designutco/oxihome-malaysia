@@ -1,12 +1,11 @@
 import { supabase } from './supabase'
 import { siteConfig } from '@/config/site'
 
-const WEBSITE_SLUG = 'oxihome-my'
 const PRODUCT_SLUG = 'oxygen-machine'
 
 /**
- * Fetch phone number for a location.
- * Fallback chain: location-specific → product default → siteConfig.fallbackPhone
+ * Fetch a random active phone number for a location from Supabase.
+ * Fallback chain: location-specific pool → 'all' pool → siteConfig.fallbackPhone
  * Never throws — always returns a valid phone string.
  */
 export async function getPhoneNumber(locationSlug: string): Promise<string> {
@@ -14,11 +13,10 @@ export async function getPhoneNumber(locationSlug: string): Promise<string> {
     const { data, error } = await supabase
       .from('phone_numbers')
       .select('phone_number, location_slug')
-      .eq('website_slug', WEBSITE_SLUG)
+      .eq('website', siteConfig.domain)
       .eq('product_slug', PRODUCT_SLUG)
-      .or(`location_slug.eq.${locationSlug},location_slug.is.null`)
-      .order('location_slug', { ascending: true, nullsFirst: false })
-      .limit(2)
+      .eq('is_active', true)
+      .in('location_slug', [locationSlug, 'all'])
 
     if (error) {
       console.error('Supabase phone number query error:', error.message)
@@ -27,13 +25,16 @@ export async function getPhoneNumber(locationSlug: string): Promise<string> {
 
     if (!data || data.length === 0) return siteConfig.fallbackPhone
 
-    const locationSpecific = data.find(row => row.location_slug === locationSlug)
-    if (locationSpecific) return locationSpecific.phone_number
+    // Prefer location-specific numbers; fall back to 'all' pool
+    const locationPool = data.filter(r => r.location_slug === locationSlug)
+    const allPool = data.filter(r => r.location_slug === 'all')
+    const pool = locationPool.length > 0 ? locationPool : allPool
 
-    const fallback = data.find(row => row.location_slug === null)
-    if (fallback) return fallback.phone_number
+    if (pool.length === 0) return siteConfig.fallbackPhone
 
-    return siteConfig.fallbackPhone
+    // Pick one at random
+    const picked = pool[Math.floor(Math.random() * pool.length)]
+    return picked.phone_number
   } catch {
     return siteConfig.fallbackPhone
   }
