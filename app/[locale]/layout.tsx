@@ -8,6 +8,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { OrganizationSchema } from '@/components/schema/OrganizationSchema'
 import { siteConfig } from '@/config/site'
 import { footerLocations } from '@/config/locations'
+import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
 import '../globals.css'
 
 const inter = Inter({
@@ -17,7 +18,6 @@ const inter = Inter({
   display: 'swap',
 })
 
-const WA_LINK  = `https://wa.me/${siteConfig.fallbackPhone}`
 const WA_GREEN = '#25D366'
 
 const OxiIcon = () => (
@@ -84,6 +84,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const t  = await getTranslations({ locale, namespace: 'nav' })
   const tf = await getTranslations({ locale, namespace: 'footer' })
+  const phone = await getPhoneNumber('all')
+  const WA_LINK = waLink(phone)
 
   const navLinks = [
     { label: t('products'),  href: `/${locale}#products` },

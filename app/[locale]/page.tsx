@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { siteConfig } from '@/config/site'
 import { locations } from '@/config/locations'
+import { getPhoneNumber, waLink } from '@/lib/getPhoneNumber'
 import { ProductSchema } from '@/components/schema/ProductSchema'
 import { FAQSchema } from '@/components/schema/FAQSchema'
 import { ReviewsCarousel } from '@/components/ReviewsCarousel'
 import { CountdownStrip } from '@/components/CountdownStrip'
 
-const WA_LINK  = `https://wa.me/${siteConfig.fallbackPhone}?text=${encodeURIComponent('Hi Oxihome, I am interested in renting an oxygen machine.')}`
 const WA_GREEN = '#25D366'
 
 const WAIcon = () => (
@@ -58,6 +58,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t  = await getTranslations({ locale, namespace: 'home' })
   const tp = await getTranslations({ locale, namespace: 'products' })
   const tc = await getTranslations({ locale, namespace: 'common' })
+  const phone = await getPhoneNumber('all')
+  const WA_LINK = waLink(phone, 'Hi Oxihome, I am interested in renting an oxygen machine.')
 
   const faqItems = [
     { question: t('faq.q1'), answer: t('faq.a1') },
