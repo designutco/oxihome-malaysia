@@ -211,6 +211,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                 {t('hero.sub', { city: cityName })}
               </p>
               <a href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 font-bold px-7 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-green-400"
                 style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.35)' }}>
                 <WAIcon />
@@ -369,6 +371,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
                   ))}
                 </div>
                 <a href={waUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 font-bold py-3 rounded-xl text-sm text-white transition-opacity hover:opacity-90 active:opacity-80 focus:outline-none focus:ring-2 focus:ring-green-400"
                   style={{ background: WA_GREEN }}>
                   <WAIcon />
@@ -482,6 +486,8 @@ export default async function LocationPage({ params }: { params: Promise<Params>
           </p>
           <a
             href={waUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 font-bold px-8 py-4 rounded-full text-base text-white transition-all hover:scale-105 active:scale-95 focus:outline-none focus:ring-4 focus:ring-white/40"
             style={{ background: WA_GREEN, boxShadow: '0 8px 32px rgba(37,211,102,0.4)' }}
           >
