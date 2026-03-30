@@ -141,6 +141,8 @@ export default async function LocaleLayout({ children, params }: Props) {
                 <LanguageSwitcher currentLocale={locale} />
                 <a
                   href={`/${locale}/redirect-whatsapp-1`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hidden sm:inline-flex items-center gap-2 font-semibold px-4 py-2 rounded-full text-sm text-white focus:outline-none focus:ring-2 focus:ring-green-400 transition-opacity hover:opacity-90 active:opacity-80"
                   style={{ background: WA_GREEN }}
                 >
@@ -173,6 +175,8 @@ export default async function LocaleLayout({ children, params }: Props) {
                   </p>
                   <a
                     href={`/${locale}/redirect-whatsapp-1`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 mt-5 text-sm font-semibold transition-opacity hover:opacity-80"
                     style={{ color: WA_GREEN }}
                   >
