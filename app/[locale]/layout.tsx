@@ -63,6 +63,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       languages: { en: '/en', ms: '/ms', zh: '/zh' },
     },
     robots: { index: true, follow: true },
+    icons: { icon: '/icon.svg', shortcut: '/icon.svg', apple: '/icon.svg' },
   }
 }
 
