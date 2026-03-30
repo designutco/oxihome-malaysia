@@ -2,7 +2,7 @@ import { headers } from 'next/headers'
 import { supabase } from './supabase'
 import { siteConfig } from '@/config/site'
 
-const PRODUCT_SLUG = 'oxygen-machine'
+const PRODUCT_SLUG = 'default'
 
 /**
  * Fetch a random active phone number for a location from Supabase.
